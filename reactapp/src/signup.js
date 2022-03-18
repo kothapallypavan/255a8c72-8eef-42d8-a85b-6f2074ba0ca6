@@ -35,6 +35,11 @@ function Signup() {
           }}> Login</a>
           </p>
         </div>
+        <input type="email" name="email" id="email"  placeholder="Enter email" value={inputs.email} onChange={handleChange}></input><br></br>
+          <input type="text" name="username" id="username" placeholder="Enter Username" value={inputs.username} onChange={handleChange}></input>
+          <input type="text" name="mobileNumber" id="mobileNumber" placeholder="Enter Mobilenumber" value={inputs.mobilenumber} onChange={handleChange}></input>
+          <input type="password" name="password" id="password" placeholder="Password" value={inputs.password} onChange={handleChange}></input>
+          <input type="password" name="confirmPassword" id="confirmPassword" placeholder="Confirm Password" value={inputs.confirmpassword} onChange={handleChange}></input>
         <input type="submit" value="Submit" id="submitButton" class="loginButton"></input>
       </form>
     </div>
