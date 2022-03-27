@@ -89,6 +89,7 @@ const signup_conf = () =>{
   }    
 }
   return (
+    //start of the return part
     <div class="mainbody">
     <div class="header">
       <h1>LawHarbor</h1>
