@@ -1,0 +1,63 @@
+body{
+  background-color: #F5F5F5;
+}
+.header{
+  margin-top: 0;
+  height:80px;
+  background-color: #398AB9;
+}
+.header h1{
+  margin-top:0;
+  padding:10px;
+  color:white;
+  text-shadow: 0px 5px #686D76;
+}
+.loginBox{
+  color:#398AB9;
+  text-align: center;
+ 
+}
+.login-content{
+  margin:0 auto;
+  width:400px;
+  margin-top:30px;
+  font-size:50px;
+}
+input[type=email],input[type=password],input[type=text] {
+  font-size:20px;
+  font-weight: bold;
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border:1px solid grey;
+}
+
+.singup-link{
+  text-align: center;
+  font-size: 20px;
+  width:300px;
+  margin:0 auto;
+  font-weight: bold; 
+  cursor: pointer;
+}
+
+.singup-link p{
+  color:black;
+}
+.singup-link a{
+  color:#398AB9;
+}
+.singup-link a:link{
+  color:#398AB9;
+  text-decoration: none;
+}
+.loginButton{
+  padding:7px 22px;
+  font-size:20px;
+  background-color: #398AB9;
+  border:none;
+  color:white;
+  cursor:pointer;
+}
+
