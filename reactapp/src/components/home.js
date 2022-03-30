@@ -3,6 +3,7 @@ import './App.css';
 import {useNavigate, UseNavigate} from "react-router-dom";
 import axios from "axios";
 import Cookies from 'universal-cookie';
+import Admin from "./admin";
 const cookies = new Cookies();
 
 
@@ -12,7 +13,13 @@ const details = {
 }
 
 function Home() {  
-
+      const navigate = useNavigate();
+      //navigate("/login");
+      //window.location.reload();
+      if(window.location.href=="https://8081-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io"){
+        navigate("/login");
+        window.location.reload();
+      }
       const [Sign_up, setSign_up] = useState(false);
       const [confirm_correct, set_confirm_correct] = useState(true);
       const [Form, setForm] = useState(details);
@@ -23,7 +30,7 @@ function Home() {
     }
 
 
-  const navigate = useNavigate();
+  
   const [inputs,setInputs] = useState("");
   
   const handleChange = (event) =>{
@@ -43,19 +50,33 @@ function Home() {
     event.preventDefault();
     console.log(inputs);
     let sign_up_data = "1";
-    await axios.post("http://localhost:1245/",
+    await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/",
     userdata,
       ).then(data => {
-        if(data.data==1){
+        if(data.data=="1"){
           set_unique(data.data);
         }
-        else if(data.data==2){
+        else if(data.data=="2"){
           set_unique(data.data);
         }
-        else if(data.data==3){
+        else if(data.data=="3"){
             console.log("reload");
             cookies.set('user', Form.mail);
+            navigate("/home");
             window.location.reload();
+        }
+        else if(data.data=="5"){
+          cookies.set("admin",Form.mail);
+          navigate("/admin");
+          window.location.reload();
+        }
+        else{
+          console.log("LAWYER");
+          cookies.set('lawyer', Form.mail);
+          cookies.set('lawyername',data.data)
+          
+          navigate("/lawyerhome");
+          window.location.reload();
         }
       });
   }
@@ -67,7 +88,7 @@ function Home() {
   const update_mail_Change = (e) => {
     updateChange(e);
     if (unique === 2)
-         set_unique(-1);
+        set_unique(-1);
 }
 const update_password_Change = (e) => {
   updateChange(e);
@@ -77,6 +98,7 @@ const update_password_Change = (e) => {
 }
 const hand = (e) =>{
   cookies.set('signup',"1");
+  navigate("/signup");
   window.location.reload();
 }
 
@@ -85,19 +107,19 @@ const hand = (e) =>{
     <div class="header">
       <h1>LawHarbor</h1>
     </div>
-    <div class="loginBox">
+    <div class="loginBox" id="loginBox">
       <h1>
         Login
         </h1>
       <form class="log-form" onSubmit={handleSubmit}>
         <div class="login-content">
-          <input type="email" name="mail" id="email" placeholder="Enter email"value={inputs.email} onChange={update_mail_Change} required></input><br></br>
+          <input type="text" name="mail" id="email" placeholder="Enter email"value={inputs.email} onChange={update_mail_Change} required></input><br></br>
           <input type="password" name="password" id="password" placeholder="Enter password"value={inputs.password} onChange={update_password_Change} required></input><br></br>
         </div>
-        {(unique === 1 && <p>Mail does not exist</p>)}
-        {(unique === 2 && <p>Wrong password</p>)}
-        <div class='singup-link'>
-          <p>New User? <a onClick={hand}>Sign Up</a>
+          {(unique === 1 && <p>Mail does not exist</p>)}
+          {(unique === 2 && <p>Wrong password</p>)}
+        <div class='singup-link' id="signupLink">
+          <p>New User? <a onClick={hand} id="signupLink">Sign Up</a>
           </p> 
         </div>
         <input type="submit" value="Login" id="loginButton" class="loginButton"></input>

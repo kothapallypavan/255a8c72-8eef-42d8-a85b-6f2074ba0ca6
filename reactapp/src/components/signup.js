@@ -5,7 +5,7 @@ import axios from "axios";
 import Home from "./home"
 import { useHistory } from "react-router-dom";
 import Cookies from 'universal-cookie';
-
+import Button from "react-bootstrap/Button";
 const cookies = new Cookies();
 
 
@@ -18,6 +18,7 @@ const details = {
 }
 
 function Signup() {
+     
   
   const [Sign_up, setSign_up] = useState(false);
      const [confirm_correct, set_confirm_correct] = useState(true);
@@ -29,28 +30,17 @@ function Signup() {
   }
   const navigate = useNavigate();
   const [inputs,setInputs] = useState("");
-  
+  const cookie_s = cookies.get("signup");
+    if(!cookie_s){
+      return <Home />
+    } 
   const handleChange = (event) =>{
     const name = event.target.name;
     const value = event.target.value;
     setInputs(values => ({...values, [name]: value}))
   }
   
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log(inputs);
-    let sign_up_data = "1";
-    if(Form.full_name==Form.password){
-      sign_up_data = await axios.post("http://localhost:1245/signup", {
-        ...Form, full_name: Form.first_name + "-" + Form.second_name,
-      });
-      set_unique(sign_up_data.data);
-      console.log(sign_up_data.data);
-    }
-    else{
-      set_unique(2);
-    }    
-  }
+  
 
 const updateChange = (e) => {
     setForm({ ...Form, [e.target.name]: e.target.value });
@@ -79,26 +69,36 @@ const update_number_Change = (e) => {
 }
 const hand = (e) =>{
   cookies.remove('signup');
+  navigate("/login");
   window.location.reload();
 }
-const signup_conf = () =>{
-  if(unique==3){
-    cookies.remove('signup');
-    alert("Registered successfully");
-    window.location.reload();
-  }    
+const signup_conf = async() =>{
+  console.log(inputs);
+    let sign_up_data = "1";
+    if(Form.full_name==Form.password){
+      sign_up_data = await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/signup", {
+        ...Form, full_name: Form.first_name + "-" + Form.second_name,
+      });
+      if(sign_up_data.data==3){
+        cookies.remove('signup');
+        window.location.reload();
+       
+      }
+      else if(sign_up_data.data==1){
+        set_unique(1);
+      }
+    }      
 }
   return (
-    //start of the return part
     <div class="mainbody">
     <div class="header">
       <h1>LawHarbor</h1>
     </div>
-    <div class="loginBox" id="loginBox">
+    <div class="loginBox">
       <h1>
         Sign Up
         </h1>
-      <form class="log-form" onSubmit={handleSubmit}>
+      <form class="log-form">
         <div class="login-content">
           <input type="email" name="mail" id="email"  placeholder="Enter email"  onChange={update_mail_Change} required></input><br></br>
           <input type="text" name="user_name" id="username" placeholder="Enter Username"  onChange={update_user_name_Change} required></input>
@@ -109,11 +109,11 @@ const signup_conf = () =>{
         {(unique === 1 && <p>User Name or email is already in use</p>)}
         {(unique === 2 && <p>Password doesnt match</p>)}
         {(unique === 3 && cookies.remove('signup'))}
-        <div class='singup-link'>
-        <p>Already a User?<a onClick={hand}> Login</a>
-          </p>
+        <div class='singup-link' id="signinLink">
+         <p>Already a User?<a id="signinLink" onClick={hand}> Login</a>
+         </p>
         </div>
-        <input type="submit" value="Submit" id="submitButton" class="loginButton"  onClick={signup_conf}></input>
+        <Button style={{backgroundColor:"#398AB9",padding:"10px 10px"}}id="submitButton"  onClick={signup_conf}>submit</Button>
       </form>
     </div>
 

@@ -9,7 +9,7 @@ const cookies = new Cookies();
 function Main() {
      const auth = cookies.get("user");
      const cookie_s = cookies.get("signup");
-     if(cookies.get("user")) return <Dash/>
+     if(cookies.get("user")) return <Dash />
      else if(cookie_s){
           return <Signup />
      } 

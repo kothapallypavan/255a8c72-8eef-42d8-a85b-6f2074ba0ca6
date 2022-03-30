@@ -30,7 +30,7 @@ input[type=email],input[type=password],input[type=text] {
   padding: 12px 20px;
   margin: 8px 0;
   box-sizing: border-box;
-  border:none;
+  border:1px solid grey;
 }
 
 .singup-link{
@@ -60,3 +60,4 @@ input[type=email],input[type=password],input[type=text] {
   color:white;
   cursor:pointer;
 }
+
