@@ -40,6 +40,7 @@ public class Login{
     public List<User> getDetails(){
         return details.getAll();
     }
+
     //signup POST
     @RequestMapping(method = RequestMethod.POST,value="/signup")
     public int addUser(@RequestBody User user) throws IOException{
@@ -62,7 +63,7 @@ public class Login{
 
     //login POST
     @CrossOrigin(origins = "https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io")
-    @RequestMapping(method = RequestMethod.POST,value="/")
+    @RequestMapping(method = RequestMethod.POST,value="/login")
     public String checkUser(@RequestBody User user){
         //details.checkU(user);
         if(user.getMail().equals("admin")){
@@ -115,18 +116,19 @@ public class Login{
     //add booking POST
     @RequestMapping(method = RequestMethod.POST,value="/booking")
     public int bookLawyer(@RequestBody Record ll){
-       List<Record>res = RR.findByUser_mail(ll.getclient());
-       System.out.println(ll.getLawyer());
-       System.out.println(ll.getDate());
-       //Record r = res.get(0);
-       for(int i=0;i<res.size();i++){
-           Record r = res.get(i);
-           System.out.println(r.getLawyer());
-           if(r.getLawyer().equals(ll.getLawyer()) && r.getDate().equals(ll.getDate())){
-               System.out.println("You have already booked!");
-                return 1;
-           }
-       }
+        List<Record>res = RR.findByUser_mail(ll.getclient());
+        for(int i=0;i<res.size();i++){
+            Record r = res.get(i);
+            if(r.getLawyer().equals(ll.getLawyer())){
+                if(r.getDate()!=null){
+                 if(r.getDate().equals(ll.getDate())){
+                    System.out.println("You have already booked!");
+                    return 1;
+                 }
+                }
+                
+            }
+        }
        Random r = new Random();
        while(true){
         String ss=String.valueOf(r.nextInt(100000000));  
@@ -178,9 +180,9 @@ public class Login{
         return 1;
 
     }
-    
+
     //Accept Appointment
-    @RequestMapping(method = RequestMethod.POST,value="/accept")
+    @RequestMapping(method = RequestMethod.POST,value="/Lawyer/booking")
     public int acceptApp(@RequestBody Record ll){
         //System.out.println(ll.getBookingid());
         //System.out.println(ll.getReport());
@@ -258,6 +260,26 @@ public class Login{
         userR.deleteById(Integer.parseInt(id));
         return 1;
     }
+    //////////////// new ////////////////////
+    //Delete Booking
+    @DeleteMapping(path="/booking/{id}")
+    public @ResponseBody int delete_booking(@PathVariable String id){
+        RR.deleteById(Integer.parseInt(id));
+        return 1;
+    }
 
+
+    //Reject Appointment
+    @DeleteMapping(path="/Lawyer/booking/{id}")
+    public @ResponseBody int rejectApp2(@PathVariable String id){
+        RR.deleteById(Integer.parseInt(id));
+        return 2;
+
+    }
+    
+    @RequestMapping(method = RequestMethod.POST,value="/Lawyer/Case Record")
+    public void addcaserecord(@RequestBody Record ll){
+        RR.save(ll);
+    }
     
 }
