@@ -50,7 +50,7 @@ function Home() {
     event.preventDefault();
     console.log(inputs);
     let sign_up_data = "1";
-    await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/",
+    await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/login",
     userdata,
       ).then(data => {
         if(data.data=="1"){

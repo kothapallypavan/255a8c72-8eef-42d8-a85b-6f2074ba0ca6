@@ -128,17 +128,17 @@ const Home2 = () => {
     c.style.width="100%";
   }
   const updateChange = (e) => {
-    if(document.getElementById("dateid") && document.getElementById("formid")){
-      var a =document.getElementById("dateid");
-      var b =document.getElementById("formid");
-      Forms.date = a.value;
-      Forms.slot = b.value;
-      setForms({ ...Forms, [e.target.name]: e.target.value });
-      console.log(Forms);
-    };
-    
-    
+   
+    Forms.date = e.target.value;
+    setForms({ ...Forms, [e.target.name]: e.target.value });
+    console.log(Forms);
   }
+  const updateChange2 = (e) => {
+    Forms.slot = e.target.value;
+    setForms({ ...Forms, [e.target.name]: e.target.value });
+    console.log(Forms);
+  }
+
   const updateName = (e) => {
     Forms.name=e.target.id;
     Forms.mail="";
@@ -156,6 +156,7 @@ const Home2 = () => {
     navigate("/clientreport");
     window.location.reload();
   }
+
   return(
     <div>
         <div>
@@ -200,8 +201,9 @@ const Home2 = () => {
                 <Card.Title style={{marginTop:'80px',fontSize:'20px'}}>{tempyear}</Card.Title>
                 <Card.Title style={{marginTop:'0px',fontSize:'20px'}}>{tempname}</Card.Title>
                 <Form onSubmit={handleSubmit}>
-                  <input onChange={updateChange} id="selectDate" type="date" name="date"></input>
-                  <Form.Select name="slot" id="selectSlot" onChange={updateChange}>
+                  SELECT DATE : <input style={{width:"10rem",marginBottom:"10px"}} onChange={updateChange} id="selectDate" type="date" name="date"></input>
+                  <br/> 
+                  <div style={{marginTop:"20px"}}>SELECT SLOT : <Form.Select style={{marginRight:"48px",width:"10rem",float:"right"}} name="slot" id="selectSlot" onChange={updateChange2}>
                     <option>9am-11am</option>
                     <option>11am-1pm</option>
                     <option>1pm-3pm</option>
@@ -209,7 +211,10 @@ const Home2 = () => {
                     <option>5pm-7pm</option>
                     <option>7pm-9pm</option>
                   </Form.Select>
+                  </div>
+                  <div style={{marginTop:"60px"}}>
                   <Button type="submit" id="submitButton">Submit</Button>
+                  </div>
                 </Form>
               </Card.Body>
             </Card>
