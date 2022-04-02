@@ -123,8 +123,10 @@ const Case = () => {
             <h2>LawHarbor</h2>            
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto" style={{marginLeft:"53rem"}}>
-                    <Nav.Link onClick={homeredirect}>Home</Nav.Link>
+                <Nav className="me-auto">
+     
+     </Nav>
+     <Nav style={{float:"right"}}><Nav.Link onClick={homeredirect}>Home</Nav.Link>
                     <Nav.Link onClick={caselink}>CaseRecord</Nav.Link>
                     <Nav.Link onClick={recordlink}>Report</Nav.Link>
                     <Nav.Link onClick={constForm}>Logout</Nav.Link>

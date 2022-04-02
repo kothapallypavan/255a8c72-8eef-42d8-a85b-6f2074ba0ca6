@@ -142,8 +142,10 @@ const Clientreport = () => {
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto" style={{marginLeft:"53rem"}}>
-                  <Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
+              <Nav className="me-auto">
+     
+     </Nav>
+     <Nav style={{float:"right"}}><Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
                   <Nav.Link onClick={goback} id="caseRecordButton">CaseRecord</Nav.Link>
                   <Nav.Link onClick={reportlink} id="reportButton">Report</Nav.Link>
                   <Nav.Link onClick={constForm} id="logoutButton">Logout</Nav.Link>
