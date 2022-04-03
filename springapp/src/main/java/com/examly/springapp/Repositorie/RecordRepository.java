@@ -22,5 +22,10 @@ public interface RecordRepository extends JpaRepository <Record, Integer> {
     @Query("select u from Record u where bookingid = ?1")
     public Record findBybooking_id(String name);
 
+    @Query("select u from Record u where date = ?1")
+    public List<Record> findByDate(String name);
+
+    @Query("select u from Record u where case_recordid = ?1")
+    public Record findByCID(String r);
 }
 

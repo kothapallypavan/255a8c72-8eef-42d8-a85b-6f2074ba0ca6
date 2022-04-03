@@ -83,20 +83,19 @@ const Case = () => {
             actiontaken:document.getElementById("actionid").value,
             eventdetails:document.getElementById("eventid").value
 
-        };      
-        console.log(userdata);
-        await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/updateactionevent",
+        };
+        await axios.put("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/actionevent",
         userdata,
             ).then(data => {
             if(data.data==1){
-                alert("Updated!");
                 let d  = document.getElementById("pop_card");
                 let c  = document.getElementById("table_id");
                 d.style.display = "none";
                 c.style.width="100%";
+                window.location.reload();
             }
             else {
-                alert("Error occured");
+                console.log("ERROR!");
             }
             });
     }
@@ -122,8 +121,10 @@ const Case = () => {
             <Container>
             <h2>LawHarbor</h2>            
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto" style={{marginLeft:"53rem"}}>
+                <Navbar.Collapse id="basic-navbar-nav"><Nav className="me-auto">
+     
+     </Nav>
+   <Nav style={{float:"right"}}>
                     <Nav.Link onClick={homeredirect}>Home</Nav.Link>
                     <Nav.Link onClick={caselink}>CaseRecord</Nav.Link>
                     <Nav.Link onClick={recordlink}>Report</Nav.Link>

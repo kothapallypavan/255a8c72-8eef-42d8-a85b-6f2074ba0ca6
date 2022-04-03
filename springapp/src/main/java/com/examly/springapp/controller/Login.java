@@ -98,13 +98,18 @@ public class Login{
     }
     
     //sample test case(returns array with lawyer usernames)
-    @GetMapping("/Lawyer")
+    @GetMapping("//Lawyer")
     public String[] getallLawyers(){
         List<User>r = userR.find_lawyers("yes");
         String[] a = new String [100];
         User rr = r.get(0);
         a[0]=rr.getUser_name();
         return a;
+    }
+
+    @GetMapping("/Lawyer")
+    public List<User>lawyer(){
+        return userR.find_lawyers("yes");
     }
 
     //Add caserecord
@@ -169,7 +174,7 @@ public class Login{
     //update action and event
     @RequestMapping(method = RequestMethod.POST,value="/updateactionevent")
     public int updateEA(@RequestBody Record ll){
-        //System.out.println(ll.getBookingid());
+        
         //System.out.println(ll.getReport());
         Record old = RR.findBybooking_id(ll.getBookingid());
         int id_value = old.id();
@@ -182,10 +187,10 @@ public class Login{
     }
 
     //Accept Appointment
+    @CrossOrigin(origins = "https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io")
     @RequestMapping(method = RequestMethod.POST,value="/Lawyer/booking")
     public int acceptApp(@RequestBody Record ll){
-        //System.out.println(ll.getBookingid());
-        //System.out.println(ll.getReport());
+        System.out.println("hello");
         Record old = RR.findBybooking_id(ll.getBookingid());
         int id_value = old.id();
         Record r = RR.findById(id_value).get();
@@ -278,8 +283,65 @@ public class Login{
     }
     
     @RequestMapping(method = RequestMethod.POST,value="/Lawyer/Case Record")
-    public void addcaserecord(@RequestBody Record ll){
-        RR.save(ll);
+    public int addcaserecord(@RequestBody Record ll){
+        if(ll.getBookingid()!=null){
+            Record old = RR.findBybooking_id(ll.getBookingid());
+            int id_value = old.id();
+            Record r = RR.findById(id_value).get();
+            r.setAction(ll.getActiontaken());
+            r.setEvent(ll.getEventdetails());
+            RR.save(r);
+        }
+        else{
+            RR.save(ll);
+            System.out.println("NOTFOUND");
+        }
+        return 1;
     }
-    
+
+    @PutMapping(path="/Lawyer/Case Record")
+    public int updaterecord(@RequestBody Record ll){
+        if(ll.getBookingid()!=null){
+            Record old = RR.findBybooking_id(ll.getBookingid());
+            int id_value = old.id();
+            Record r = RR.findById(id_value).get();
+            r.setAction(ll.getActiontaken());
+            r.setEvent(ll.getEventdetails());
+            RR.save(r);
+        }
+        else{
+            RR.save(ll);
+            System.out.println("NOTFOUND");
+        }
+        return 1;
+    }
+
+    /*
+    //update lawyer
+    @PutMapping(path="/Lawyer/Case Record/{id}")
+    public @ResponseBody void update_record(@RequestBody Record record,@PathVariable String id){
+        Record r = RR.findByCID(id);
+
+        User u = userR.findById(id_value).get();
+        u.setExp(user.getExp());
+        u.setMail(user.getMail());
+        u.setPassword(user.getPassword());
+        u.setSpec(user.getSpec());
+        u.setUser_name(user.getUser_name());
+        userR.save(u);
+
+    }    
+    */
+
+    //Delete Booking
+    @DeleteMapping(path="/Lawyer/Case Record")
+    public @ResponseBody int delete_case(@RequestBody Record ll){
+        List<Record> old = RR.findByDate(ll.getDate());
+        int sz = old.size();
+        for(int i=0;i<sz;i++){
+            System.out.println(old.get(i).id()); 
+            RR.deleteById(old.get(i).id());   
+        }
+        return 1;
+    }
 }
