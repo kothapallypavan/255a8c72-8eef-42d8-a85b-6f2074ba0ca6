@@ -109,7 +109,11 @@ const Lawyerhome = () => {
       bookingid:e.target.id
     };
     //console.log(userdata);
+<<<<<<< HEAD
       await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/accept",
+=======
+      await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/http:/Lawyer/booking",
+>>>>>>> 241e354a63d4f683247f8f530cfb3b82e7772164
       userdata,
         ).then(data => {
           if(data.data==1){
