@@ -111,7 +111,7 @@ const Lawyerhome = () => {
     reject_id = await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/rejectid",
                 userdata,
                 );
-    let url = "hhttps://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Lawyer/booking/"+String(reject_id.data)
+    let url = "https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Lawyer/booking/"+String(reject_id.data)
     await axios.delete(url
           ).then(data => {
               if(data.data==1){

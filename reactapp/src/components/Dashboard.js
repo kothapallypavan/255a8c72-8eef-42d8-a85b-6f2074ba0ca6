@@ -43,7 +43,6 @@ const Home2 = () => {
         setclientdb(result);
       })
     },[])
-
     var client_username;
     console.log("ClientDB",clientdb);
     for(let i=0;i<clientdb.length;i++){
@@ -62,16 +61,14 @@ const Home2 = () => {
       var slot = Forms.slot;
       var client = cookies.get("user");
       var clientuser = client_username;
-      var CaseRecordId = "CRD001";
-      
+
       const userdata = {
         mail,
         lawyer,
         date,
         slot,
         client,
-        clientuser,
-        CaseRecordId
+        clientuser
       };
 
       event.preventDefault();
@@ -91,8 +88,9 @@ const Home2 = () => {
         });
     }
 
+    //Get lawyers arrayList
     useEffect(()=>{
-      fetch("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Admin/Lawyer")
+      fetch("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Lawyer")
       .then(res=>res.json())
       .then((result)=>{
         setLawyers(result);
@@ -140,7 +138,6 @@ const Home2 = () => {
     setForms({ ...Forms, [e.target.name]: e.target.value });
     console.log(Forms);
   }
-
   const updateName = (e) => {
     Forms.name=e.target.id;
     Forms.mail="";
@@ -158,7 +155,6 @@ const Home2 = () => {
     navigate("/clientreport");
     window.location.reload();
   }
-
   return(
     <div>
         <div>
@@ -166,12 +162,11 @@ const Home2 = () => {
         <Container>
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-              <Nav className="me-auto">
+              <Navbar.Collapse id="basic-navbar-nav"><Nav className="me-auto">
      
-     </Nav>
-     <Nav style={{float:"right"}}>
-       <Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
+              </Nav>
+            <Nav style={{float:"right"}}>
+                  <Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
                   <Nav.Link onClick={goback} id="caseRecordButton">CaseRecord</Nav.Link>
                   <Nav.Link onClick={reportlink} id="reportButton">Report</Nav.Link>
                   <Nav.Link onClick={constForm} id="logoutButton">Logout</Nav.Link>
@@ -186,7 +181,7 @@ const Home2 = () => {
       {
                                
         lawyers.map(lawyer => (
-          <Card onClick={togglePopup} id="grid1"  style={{ float:"left",width: '12rem',height:'15rem',margin:'20px 30px',border:'2px solid grey',textAlign:'center',borderRadius: '20%',cursor:"pointer"}}>
+          <Card onClick={togglePopup}  style={{ float:"left",width: '12rem',height:'15rem',margin:'20px 30px',border:'2px solid grey',textAlign:'center',borderRadius: '20%',cursor:"pointer"}}>
           <Card.Img onClick={updateName} id={lawyer.user_name} name={lawyer.exp} value={lawyer.name} variant="top" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style={{width:'5rem',height:'5rem',margin:'0 auto',marginTop:'2rem' ,marginBottom:'0px'}}/>
           <div style={{width:'10px',height:"10px",backgroundColor:"yellow",borderRadius:'50%',position:"absolute",left:'78%',top:'6%'}}></div>
           <Card.Body style={{borderRadius: '23%',overflow:"hidden"}}>
@@ -199,30 +194,33 @@ const Home2 = () => {
       }
           </div>
           <div id="hello2" style={{display:"none"}}>
-          <Card style={{ width: '25rem',height:'38rem',border:'2px solid grey',borderRadius: '4%',textAlign:'center',marginRight:'20px',marginTop:'20px'}}>
-              <Card.Body style={{overflow:"hidden"}}>
-                <Card.Title style={{marginLeft:"20px"}}>Add Appointment<CloseButton aria-label="Hide" onClick={closebutton} style={{float:"right"}}/></Card.Title>
-                <Card.Img variant="top" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style={{width:'5rem',height:'5rem',margin:'0 auto',marginTop:'2rem' ,marginBottom:'0px'}}/>
-                <Card.Title style={{marginTop:'80px',fontSize:'20px'}}>{tempyear}</Card.Title>
-                <Card.Title style={{marginTop:'0px',fontSize:'20px'}}>{tempname}</Card.Title>
-                <Form onSubmit={handleSubmit}>
+      <Card style={{ width: '25rem',height:'38rem',border:'2px solid grey',borderRadius: '4%',textAlign:'center',marginRight:'20px',marginTop:'20px'}}>
+          <Card.Body style={{overflow:"hidden"}}>
+            <Card.Title style={{marginLeft:"20px"}}>Add Appointment<CloseButton aria-label="Hide" onClick={closebutton} style={{float:"right"}}/></Card.Title>
+            <Card.Img variant="top" src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" style={{width:'5rem',height:'5rem',margin:'0 auto',marginTop:'2rem' ,marginBottom:'0px'}}/>
+            <Card.Title style={{marginTop:'80px',fontSize:'20px'}}>{tempyear}</Card.Title>
+            <Card.Title style={{marginTop:'0px',fontSize:'20px'}}>{tempname}</Card.Title>
+            <Form onSubmit={handleSubmit}>
                   SELECT DATE : <input style={{width:"10rem",marginBottom:"10px"}} onChange={updateChange} id="selectDate" type="date" name="date"></input>
                   <br/> 
                   <div style={{marginTop:"20px"}}>SELECT SLOT : <Form.Select style={{marginRight:"48px",width:"10rem",float:"right"}} name="slot" id="selectSlot" onChange={updateChange2}>
-                    <option>9am-11am</option>
-                    <option>11am-1pm</option>
-                    <option>1pm-3pm</option>
-                    <option>3pm-5pm</option>
-                    <option>5pm-7pm</option>
-                    <option>7pm-9pm</option>
+                    <option>10am</option>
+                    <option>11am</option>
+                    <option>12pm</option>
+                    <option>1pm</option>
+                    <option>2pm</option>
+                    <option>3pm</option>
+                    <option>4pm</option>
+                    <option>5pm</option>
+                    <option>6pm</option>
                   </Form.Select>
                   </div>
                   <div style={{marginTop:"60px"}}>
                   <Button type="submit" id="submitButton">Submit</Button>
                   </div>
                 </Form>
-              </Card.Body>
-            </Card>
+          </Card.Body>
+        </Card>
           </div>
         </div>
       </div>
