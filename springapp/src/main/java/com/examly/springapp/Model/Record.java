@@ -24,11 +24,13 @@ public class Record {
      private String actiontaken="NA";
      private String isconfirmed="no";
      private String report="NA";
+     private String CaseRecordID;
 
      public Record() {
      }
-     public Record(String client,String clientuser,String lawyer,String date,String slot,String bookingid,String eventdetails,String actiontaken,String isconfirmed,String report){
+     public Record(String CaseRecordID,String client,String clientuser,String lawyer,String date,String slot,String bookingid,String eventdetails,String actiontaken,String isconfirmed,String report){
          super();
+         this.CaseRecordID = CaseRecordID;
          this.client = client;
          this.clientuser = clientuser;
          this.lawyer = lawyer;
@@ -93,6 +95,12 @@ public class Record {
     }
     public void rejectConfirm(){
         this.isconfirmed="rejected";
+    }
+    public String getCaseid(){
+        return CaseRecordID;
+    }
+    public void setCaseid(String CaseRecordID){
+        this.CaseRecordID = CaseRecordID;
     }
      
 }
