@@ -2,6 +2,7 @@ package com.examly.springapp.Repositorie;
 
 import org.springframework.stereotype.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import java.util.List;
@@ -27,5 +28,11 @@ public interface RecordRepository extends JpaRepository <Record, Integer> {
 
     @Query("select u from Record u where case_recordid = ?1")
     public Record findByCID(String r);
+    
+    
+    @Modifying
+    @Query("delete from Record where bookingid = :firstName")
+    public Record deleterecord(@Param("firstName") String firstName);
+
 }
 
