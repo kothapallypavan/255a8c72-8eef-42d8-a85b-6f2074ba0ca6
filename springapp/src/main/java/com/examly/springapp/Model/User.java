@@ -6,21 +6,32 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "user_details")
 public class User {
      @Id
      @GeneratedValue(strategy=GenerationType.AUTO)
      private int id;
-
+     
+     @JsonProperty("user_name")
      private String user_name;
      private String mail;
+
+     @JsonProperty("name")
      private String name;
+     
      private String number;
      private String password;
      private String is_lawyer="no";
      private String exp;
+
+     @JsonProperty("specialist")
      private String specialist;
+
 
      public User() {
      }
@@ -36,13 +47,6 @@ public class User {
          this.specialist = specialist;
      }
      
-     /*
-     @Override
-     public String toString() {
-          return "UserName :" + getUser_name() + "\npassword :" + getPassword()
-                    + "\nFullName :" + getFull_name() + "\nmail :" + getMail() + "\nnumber :" + getNumber();
-     }
-     */
      public int get_id(){
           return id;
      }

@@ -6,14 +6,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+@JsonIgnoreProperties(ignoreUnknown = true)
 @Entity
 @Table(name = "record")
 public class Record {
      @Id
      @GeneratedValue(strategy=GenerationType.AUTO)
      private int id;
-
+    
      private String clientuser;
      private String client;
      private String lawyer;
@@ -24,13 +27,15 @@ public class Record {
      private String actiontaken="NA";
      private String isconfirmed="no";
      private String report="NA";
+
+     @JsonProperty("CaseRecordID")
      private String CaseRecordID;
 
      public Record() {
      }
-     public Record(String CaseRecordID,String client,String clientuser,String lawyer,String date,String slot,String bookingid,String eventdetails,String actiontaken,String isconfirmed,String report){
+     public Record(int id,String client,String clientuser,String lawyer,String date,String slot,String bookingid,String eventdetails,String actiontaken,String isconfirmed,String report,String CaseRecordID){
          super();
-         this.CaseRecordID = CaseRecordID;
+         this.id=id;
          this.client = client;
          this.clientuser = clientuser;
          this.lawyer = lawyer;
@@ -41,6 +46,7 @@ public class Record {
          this.actiontaken = actiontaken;
          this.isconfirmed = isconfirmed;
          this.report = report;
+         this.CaseRecordID = CaseRecordID;
      }
      public int id(){
          return id;
@@ -96,11 +102,10 @@ public class Record {
     public void rejectConfirm(){
         this.isconfirmed="rejected";
     }
-    public String getCaseid(){
+    public String getCaserecordid(){
         return CaseRecordID;
     }
-    public void setCaseid(String CaseRecordID){
+    public void setCaserecord(String CaseRecordID){
         this.CaseRecordID = CaseRecordID;
     }
-     
 }
