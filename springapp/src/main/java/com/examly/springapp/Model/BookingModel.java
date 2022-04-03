@@ -24,6 +24,14 @@ public class BookingModel {
 
      public BookingModel() {
      }
-     
+     public BookingModel(String bookingid,UserModel clientDetail,String lawfirmName,Date date,Date time,boolean bookingStatus){
+         super();
+         this.bookingid=bookingid;
+         this.clientDetail=clientDetail;
+         this.lawfirmName=lawfirmName;
+         this.date=date;
+         this.time=time;
+         this.bookingStatus = bookingStatus;
+     }
      
 }
