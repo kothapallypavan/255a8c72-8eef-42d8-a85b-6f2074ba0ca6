@@ -117,8 +117,10 @@ const Caserecordlawyer = () => {
             <Container>
             <h2>LawHarbor</h2>            
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                <Navbar.Collapse id="basic-navbar-nav">
-                    <Nav className="me-auto" style={{marginLeft:"53rem"}}>
+                <Navbar.Collapse id="basic-navbar-nav"><Nav className="me-auto">
+     
+     </Nav>
+   <Nav style={{float:"right"}}>
                     <Nav.Link onClick={homeredirect}>Home</Nav.Link>
                     <Nav.Link onClick={caselink}>CaseRecord</Nav.Link>
                     <Nav.Link onClick={reportlink}>Report</Nav.Link>
@@ -139,7 +141,7 @@ const Caserecordlawyer = () => {
                     </thead>   
                     <tbody>    
                         {
-                            lawyers.map(law => (
+                            lawyers.map(law => (law.isconfirmed=="yes" &&
                                 
                                 <tr onClick={tid} class={law.date} title={law.lawyer} style={{cursor:"pointer"}}>
                                     <td id={law.bookingid} class={law.date} title={law.lawyer}>{law.bookingid}</td>

@@ -27,6 +27,14 @@ const Admin = () => {
    const[specialist,setSpecialist]=useState("")
    const[db,setDB]=useState([])
    const[tempid,Setempid] = useState("")
+   const[search,Setsearch]= useState("")
+
+   //set update values
+   const[updatename,Setupdatename]=useState("")
+   const[updatepassword,Setupdatepassword]=useState("")
+   const[updateemail,Setupdateemail]=useState("")
+   const[updateexp,Setupdateexp]=useState("")
+   const[updatespec,Setupdatespec]=useState("")
 
    if(!cookies.get("admin")){
         navigate("/login");
@@ -36,13 +44,17 @@ const Admin = () => {
     navigate("/admin");
     window.location.reload();
   }
+
+  const searchFeild = () =>{
+    Setsearch(document.getElementById("searchBox").value);
+  }
+
   const logout = () =>{
     cookies.remove("admin");
     navigate("/login");
     window.location.reload();
   }
   const showpopup = () =>{
-    
     var a = document.getElementById("popupcard");
     var b = document.getElementById("popupcard2");
     a.style.display = "block";
@@ -73,6 +85,16 @@ const Admin = () => {
     b.style.display = "none";
   }
 
+  //getclientDB
+  useEffect(()=>{
+    fetch("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Admin/Lawyer")
+    .then(res=>res.json())
+    .then((result)=>{
+      setDB(result);
+    })
+  },[])
+  console.log("DB ",db);
+  
   //Add Lawyer
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,9 +102,8 @@ const Admin = () => {
         user_name:document.getElementById("enterName").value,
         mail:document.getElementById("enterMail").value,
         password:document.getElementById("enterPassword").value,
-        isLawyer:"yes",
         name:document.getElementById("enterName").value,
-        exp:document.getElementById("enterExperiance").value,
+        experiance:document.getElementById("enterExperiance").value,
         specialist:document.getElementById("enterSpecialist").value
     };
     console.log(userdata);
@@ -90,7 +111,6 @@ const Admin = () => {
     userdata,
       ).then(data => {
         if(data.data==1){
-          alert("Done");
           window.location.reload();
         }
       });
@@ -112,19 +132,19 @@ const Admin = () => {
     let text = org_id.toString();
     var newurl = old_url.concat(text);
     const userdata={
-      mail:mail,
-      user_name:name,
-      password:password,
-      exp:experiance,
-      specialist:specialist
+      mail:updateemail,
+      user_name:updatename,
+      password:updatepassword,
+      exp:updateexp,
+      specialist:updatespec
 
     }
-    console.log("userdata",userdata);
-    console.log("new url",newurl);
     const rr = await axios.put(newurl,
     userdata,
       );
-    console.log(rr.data);
+    if(rr.data==1){
+      window.location.reload();
+    }
 
   }
 
@@ -138,7 +158,6 @@ const Admin = () => {
     let intid = await axios.post(url,
         user_data
     )
-    console.log(intid.data);
     let old_url ="https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Admin/Lawyer/";
     let text = intid.data.toString();
     var newurl = old_url.concat(text);
@@ -148,22 +167,27 @@ const Admin = () => {
     const rr = await axios.delete(newurl,
     userdata,
       );
-    alert("Deleted");
     window.location.reload();
 
   }
 
-  //getclientDB
   
-  useEffect(()=>{
-    fetch("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Admin/Lawyer")
-    .then(res=>res.json())
-    .then((result)=>{
-      setDB(result);
-    })
-  },[])
-  console.log("DB ",db);
   
+  const update_name = (e)=>{
+    Setupdatename(e.target.value);
+  }
+  const update_email = (e)=>{
+    Setupdateemail(e.target.value);
+  }
+  const update_pass = (e)=>{
+    Setupdatepassword(e.target.value);
+  }
+  const update_spec = (e)=>{
+    Setupdatespec(e.target.value);
+  }
+  const update_exp = (e)=>{
+    Setupdateexp(e.target.value);
+  }
   return(
     <div>
         <div>
@@ -172,8 +196,11 @@ const Admin = () => {
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto" style={{marginLeft:"65rem"}}>
-                  <Nav.Link onClick={homelink} style={{fontSize:"20px",color:"black"}}>Home</Nav.Link>
+              <Nav className="me-auto">
+     
+              </Nav>
+            <Nav style={{float:"right"}}>
+       <Nav.Link onClick={homelink} style={{fontSize:"20px",color:"black"}}>Home</Nav.Link>
                   <Nav.Link onClick={logout} style={{fontSize:"20px",color:"black"}}>Logout</Nav.Link>
                 </Nav>
               </Navbar.Collapse>
@@ -182,12 +209,12 @@ const Admin = () => {
         </div>
 
         <div >
-        <Form.Control id="searchBox" as="textarea" rows={1} style={{ float:"left",border:"1px solid black",marginLeft:"300px",width:"50%",marginTop:"20px",resize: "none",marginBottom:"20px"}} placeholder="Type here to search"/>
-        <Button id="searchButton" style={{marginTop:"20px",marginLeft:"20px"}}>Search</Button>
+        <Form.Control onChange={searchFeild} id="searchBox" as="textarea" rows={1} style={{ float:"left",border:"1px solid black",marginLeft:"10%",width:"50%",marginTop:"20px",resize: "none",marginBottom:"20px"}} placeholder="Type here to search"/>
+        <Button id="searchButton" onClick={searchFeild} style={{marginTop:"20px",marginLeft:"20px"}}>Search</Button>
         <Button id="addButton" onClick={showpopup} style={{marginTop:"20px",marginLeft:"20px"}}>ADD</Button>
         </div>
 
-        <div style={{width:"1000px",float:"left",marginTop:"30px"}}>
+        <div style={{width:"70%",float:"left",marginTop:"30px"}}>
         <Table striped bordered hover>
                     <thead>
                         <tr style={{border:"2px solid black",borderTop:"0px",borderLeft:"0px",borderRight:"0px"}}>
@@ -200,7 +227,7 @@ const Admin = () => {
         
         {
             
-            db.map(lawyer => (
+            db.map(lawyer => ( lawyer.user_name.includes(search)  &&
               <tr>
                 <td style={{textAlign:"center",padding:"20px"}}>{a}</td>
                 <td style={{textAlign:"center"}}>{lawyer.user_name}</td>
@@ -239,11 +266,11 @@ const Admin = () => {
             <Card.Body style={{overflow:"hidden"}}>
                 <Card.Title style={{marginLeft:"20px"}}>ADD/Edit Details<CloseButton aria-label="Hide"  onClick={closebutton} style={{float:"right"}}/></Card.Title>
                 <Form >
-                <Form.Control as="textarea" placeholder={name} id="enterName" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}} required/>
-                <Form.Control as="textarea" placeholder={mail} id="enterMail" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}} required/>
-                <Form.Control as="textarea" placeholder={password} id="enterPassword" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
-                <Form.Control as="textarea" placeholder={experiance} id="enterExperiance" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
-                <Form.Control as="textarea" placeholder={specialist} id="enterSpecialist" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
+                <Form.Control as="textarea" onChange={update_name} placeholder={name} id="enterName" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}} required/>
+                <Form.Control as="textarea" onChange={update_email} placeholder={mail} id="enterMail" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}} required/>
+                <Form.Control as="textarea" onChange={update_pass} placeholder={password} id="enterPassword" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
+                <Form.Control as="textarea" onChange={update_exp} placeholder={experiance} id="enterExperiance" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
+                <Form.Control as="textarea" onChange={update_spec} placeholder={specialist} id="enterSpecialist" rows={1} style={{padding:"15px",resize: "none",margin:"20px 0px"}}  required/>
                 <Button id="updateButton" onClick={handlesub}>Update</Button>
                 </Form>
             </Card.Body>

@@ -62,14 +62,16 @@ const Home2 = () => {
       var slot = Forms.slot;
       var client = cookies.get("user");
       var clientuser = client_username;
-
+      var CaseRecordId = "CRD001";
+      
       const userdata = {
         mail,
         lawyer,
         date,
         slot,
         client,
-        clientuser
+        clientuser,
+        CaseRecordId
       };
 
       event.preventDefault();
@@ -165,8 +167,11 @@ const Home2 = () => {
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
               <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto" style={{marginLeft:"53rem"}}>
-                  <Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
+              <Nav className="me-auto">
+     
+     </Nav>
+     <Nav style={{float:"right"}}>
+       <Nav.Link onClick={homelink} id="homeButton">Home</Nav.Link>
                   <Nav.Link onClick={goback} id="caseRecordButton">CaseRecord</Nav.Link>
                   <Nav.Link onClick={reportlink} id="reportButton">Report</Nav.Link>
                   <Nav.Link onClick={constForm} id="logoutButton">Logout</Nav.Link>

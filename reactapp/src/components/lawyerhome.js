@@ -4,10 +4,7 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import NavDropdown from "react-bootstrap/NavDropdown";
 import Container from "react-bootstrap/Container";
-import Form from "react-bootstrap/Form";
-import CloseButton from "react-bootstrap/CloseButton";
 import Cookies from 'universal-cookie';
 import { useState } from "react";
 import { useEffect } from "react";
@@ -33,7 +30,6 @@ const Lawyerhome = () => {
     const[tempid,setTempid]=useState("")
     const[tempyear,setTempyear]=useState("")
     const [Forms, setForms] = useState(details);
-    const[templ,setTempl]=useState("")
 
     
 
@@ -44,7 +40,7 @@ const Lawyerhome = () => {
         setLawyers(result);
       })
     },[])
-    //console.log(cookies);
+    
     console.log("lawyer:",lawyers);
     const navigate = useNavigate();
 
@@ -72,20 +68,6 @@ const Lawyerhome = () => {
     
   }
   
-  const closebutton = () => {
-    let d  = document.getElementById("hello2");
-    let c  = document.getElementById("hello");
-    d.style.display = "none";
-    c.style.width="100%";
-  }
-  const updateChange = (e) => {
-    var a = document.getElementById("dateid");
-    var b = document.getElementById("formid");
-    Forms.date = a.value;
-    Forms.slot = b.value;
-    setForms({ ...Forms, [e.target.name]: e.target.value });
-    console.log(Forms);
-  }
   const updateName = (e) => {
     Forms.name=e.target.id;
     Forms.mail="";
@@ -108,8 +90,7 @@ const Lawyerhome = () => {
     const userdata = {
       bookingid:e.target.id
     };
-    //console.log(userdata);
-      await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/http:/Lawyer/booking",
+      await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Lawyer/booking",
       userdata,
         ).then(data => {
           if(data.data==1){
@@ -126,19 +107,22 @@ const Lawyerhome = () => {
     const userdata = {
       bookingid:e.target.id
     };
-    //console.log(userdata);
-      await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/reject",
-      userdata,
-        ).then(data => {
-          if(data.data==1){
-            console.log("Error");
-          }
-          else if(data.data==2){
-            alert("Done");
-            window.location.reload();
-          }
-        });
+    let reject_id = 0;
+    reject_id = await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/rejectid",
+                userdata,
+                );
+    let url = "hhttps://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/Lawyer/booking/"+String(reject_id.data)
+    await axios.delete(url
+          ).then(data => {
+              if(data.data==1){
+                  console.log("Error");
+                }
+                else if(data.data==2){
+                    window.location.reload();
+                }
+           });
   }
+
   return(
     <div>
         <div>
@@ -146,8 +130,10 @@ const Lawyerhome = () => {
         <Container>
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto" style={{marginLeft:"53rem"}}>
+              <Navbar.Collapse id="basic-navbar-nav"><Nav className="me-auto">
+     
+        </Nav>
+        <Nav style={{float:"right"}}>
                   <Nav.Link onClick={homeredirect}>Home</Nav.Link>
                   <Nav.Link onClick={goback}>CaseRecord</Nav.Link>
                   <Nav.Link onClick={caseredirect}>Report</Nav.Link>
@@ -181,7 +167,7 @@ const Lawyerhome = () => {
         lawyers.map(lawyer => (
           (lawyer.lawyer == cookies.get("lawyername") && lawyer.isconfirmed=="no" && 
           
-          <div style={{height:"50px",backgroundColor:"lightblue",marginBottom:"20px",width:"420px",marginLeft:"20px"}}>
+          <div style={{height:"100px",backgroundColor:"lightblue",marginBottom:"20px",width:"420px",marginLeft:"20px"}}>
             <p style={{float:"left",marginLeft:"10px",marginTop:"10px"}}>{lawyer.clientuser}</p>
             <p style={{float:"left",marginLeft:"30px",marginTop:"10px"}}>{lawyer.date}</p>
             <p style={{float:"left",marginLeft:"30px",marginTop:"10px"}}>{lawyer.slot}</p>

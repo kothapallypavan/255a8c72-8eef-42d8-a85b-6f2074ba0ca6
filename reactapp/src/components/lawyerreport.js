@@ -139,8 +139,10 @@ const Lawerreport = () => {
         <Container>
           <h2>LawHarbor</h2>            
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
-              <Navbar.Collapse id="basic-navbar-nav">
-                <Nav className="me-auto" style={{marginLeft:"53rem"}}>
+              <Navbar.Collapse id="basic-navbar-nav"><Nav className="me-auto">
+     
+     </Nav>
+   <Nav style={{float:"right"}}>
                   <Nav.Link onClick={homelink}>Home</Nav.Link>
                   <Nav.Link onClick={goback}>CaseRecord</Nav.Link>
                   <Nav.Link onClick={reportlink}>Report</Nav.Link>
