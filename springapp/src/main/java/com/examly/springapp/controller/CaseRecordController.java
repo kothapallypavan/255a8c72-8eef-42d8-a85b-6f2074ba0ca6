@@ -66,6 +66,15 @@ public class CaseRecordController{
         RR.save(old);
         return 1;
     }
-    
+    //view CaseRecord
+    public CaseRecordModel viewCaseRecord(String id){
+        CaseRecordModel cd = new CaseRecordModel();
+        Record r = RR.findBybooking_id(id);
+        cd.setActionTaken(r.getActiontaken());
+        cd.setDate(r.getDate());
+        cd.setEventDetail(r.getEventdetails());
+        cd.setCaseRecordID(r.getCaserecordid()); 
+        return cd;
+    }
 }
   
