@@ -1,7 +1,4 @@
 package com.examly.springapp.Model;
-
-import java.util.Date;
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -10,19 +7,19 @@ public class CaseRecordModel {
     
     @JsonProperty("CaseRecordID")
      private String CaseRecordID;
-     
-     private UserModel userId;
 
-     @JsonProperty("date")
-     private String date;
-     
-     @JsonProperty("eventDetail")
-     private String eventDetail;
+    private UserModel userId;
 
-     @JsonProperty("actionTaken")
-     private String actionTaken;
+    @JsonProperty("date")
+    private String date;
 
-     private UserModel issuedBy;
+    @JsonProperty("eventDetail")
+    private String eventDetail;
+
+    @JsonProperty("actionTaken")
+    private String actionTaken;
+
+    private UserModel issuedBy;
 
 
      public CaseRecordModel() {
@@ -42,9 +39,6 @@ public class CaseRecordModel {
      public UserModel getUserid(){
         return userId;
     }
-    public String getDate(){
-        return date;
-    }
     public String getEvent(){
         return eventDetail;
     }
@@ -54,5 +48,33 @@ public class CaseRecordModel {
     public UserModel getIssue(){
         return issuedBy;
     }
-     
+
+    public void setCaseRecordID(String CaseRecordID) {
+        this.CaseRecordID = CaseRecordID;
+    }
+
+    public void setUserId(UserModel userId) {
+        this.userId = userId;
+    }
+
+
+    public String getDate() {
+        return this.date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+
+    public void setEventDetail(String eventDetail) {
+        this.eventDetail = eventDetail;
+    }
+
+    public void setActionTaken(String actionTaken) {
+        this.actionTaken = actionTaken;
+    }
+    public void setIssuedBy(UserModel issuedBy) {
+        this.issuedBy = issuedBy;
+    }
 }
