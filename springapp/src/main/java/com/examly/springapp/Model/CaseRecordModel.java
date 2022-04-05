@@ -1,4 +1,7 @@
 package com.examly.springapp.Model;
+
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -7,19 +10,19 @@ public class CaseRecordModel {
     
     @JsonProperty("CaseRecordID")
      private String CaseRecordID;
+     
+     private UserModel userId;
 
-    private UserModel userId;
+     @JsonProperty("date")
+     private String date;
+     
+     @JsonProperty("eventDetail")
+     private String eventDetail;
 
-    @JsonProperty("date")
-    private String date;
+     @JsonProperty("actionTaken")
+     private String actionTaken;
 
-    @JsonProperty("eventDetail")
-    private String eventDetail;
-
-    @JsonProperty("actionTaken")
-    private String actionTaken;
-
-    private UserModel issuedBy;
+     private UserModel issuedBy;
 
 
      public CaseRecordModel() {
@@ -36,45 +39,32 @@ public class CaseRecordModel {
      public String getCaseID(){
          return CaseRecordID;
      }
+     public void setCaseID(String CaseRecordID){
+        this.CaseRecordID = CaseRecordID;
+     }
      public UserModel getUserid(){
         return userId;
     }
+    public String getDate(){
+        return date;
+    }
+    public void setDate(String date){
+        this.date = date;
+     }
     public String getEvent(){
         return eventDetail;
     }
+    public void setEvent(String eventDetail){
+        this.eventDetail = eventDetail;
+     }
     public String getAction(){
         return actionTaken;
     }
+    public void setAction(String actionTaken){
+        this.actionTaken = actionTaken;
+     }
     public UserModel getIssue(){
         return issuedBy;
     }
-
-    public void setCaseRecordID(String CaseRecordID) {
-        this.CaseRecordID = CaseRecordID;
-    }
-
-    public void setUserId(UserModel userId) {
-        this.userId = userId;
-    }
-
-
-    public String getDate() {
-        return this.date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-
-    public void setEventDetail(String eventDetail) {
-        this.eventDetail = eventDetail;
-    }
-
-    public void setActionTaken(String actionTaken) {
-        this.actionTaken = actionTaken;
-    }
-    public void setIssuedBy(UserModel issuedBy) {
-        this.issuedBy = issuedBy;
-    }
+     
 }
