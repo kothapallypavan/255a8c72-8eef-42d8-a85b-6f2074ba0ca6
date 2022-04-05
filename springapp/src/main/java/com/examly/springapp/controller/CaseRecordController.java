@@ -8,6 +8,7 @@ import com.examly.springapp.Repositorie.RecordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -67,7 +68,8 @@ public class CaseRecordController{
         return 1;
     }
     //view CaseRecord
-    public CaseRecordModel viewCaseRecord(String id){
+    @GetMapping("/Case Record/{id}")
+    public @ResponseBody CaseRecordModel viewCaseRecord(@PathVariable String id){
         CaseRecordModel cd = new CaseRecordModel();
         Record r = RR.findBybooking_id(id);
         cd.setActionTaken(r.getActiontaken());
