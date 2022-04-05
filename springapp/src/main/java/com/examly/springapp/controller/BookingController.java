@@ -1,12 +1,15 @@
 package com.examly.springapp.controller;
 import com.examly.springapp.Model.Record;
+import com.examly.springapp.Model.BookingModel;
 import com.examly.springapp.Repositorie.RecordRepository;
 import com.examly.springapp.Repositorie.UserRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,25 +29,27 @@ public class BookingController{
     public UserRepository userR;
     
 
-    //Accept Booking
-    @RequestMapping(method = RequestMethod.POST,value="/Lawyer/booking")
-    public int acceptApp(@RequestBody Record ll){
+    //view CaseRecord
+    @GetMapping("/booking/{id}")
+    public @ResponseBody BookingModel viewCaseRecord(@PathVariable String id){
+        BookingModel bm = new BookingModel();
+        Record r = RR.findBybooking_id(id);
+        if(r.getIsconfirmed()=="yes")
+            bm.setBookingStatus(true);
+        else
+            bm.setBookingStatus(false);
+        bm.setBookingid(r.getBookingid());
+        bm.setLawfirmName(r.getLawyer());        
+        return bm;
+    }
+
+    //Modify approve or reject
+    @PutMapping(path="/modifystatus")
+    public void statusModifier(@RequestBody BookingModel ll){
         Record old = RR.findBybooking_id(ll.getBookingid());
-        int id_value = old.id();
-        Record r = RR.findById(id_value).get();
-        r.setConfirm();
-        RR.save(r);
-        return 2;
-
+        old.setConfirm();
+        RR.save(old);
     }
-
-    //Delete Booking
-    @DeleteMapping(path="/booking/{id}")
-    public @ResponseBody int removeBooking(@PathVariable String id){
-        RR.deleteById(Integer.parseInt(id));
-        return 1;
-    }
-
 
     //booking POST
     @RequestMapping(method = RequestMethod.POST,value="/booking")
@@ -75,16 +80,34 @@ public class BookingController{
        RR.save(ll);
        return 2; 
     }
-
-
-
+    
+    //Delete Booking
+    @DeleteMapping(path="/booking/{id}")
+    public @ResponseBody int removeBooking(@PathVariable String id){
+        RR.deleteById(Integer.parseInt(id));
+        return 1;
+    }
+    
     //Remove booking
     @DeleteMapping(path="/Lawyer/booking/{id}")
     public @ResponseBody int removeBookingbylawyer(@PathVariable String id){
         RR.deleteById(Integer.parseInt(id));
         return 2;
     }
+
     
+    //Accept Booking
+    @RequestMapping(method = RequestMethod.POST,value="/Lawyer/booking")
+    public int acceptApp(@RequestBody Record ll){
+        Record old = RR.findBybooking_id(ll.getBookingid());
+        int id_value = old.id();
+        Record r = RR.findById(id_value).get();
+        r.setConfirm();
+        RR.save(r);
+        return 2;
+
+    }
+
     //Get booking id
     @RequestMapping(method = RequestMethod.POST,value="/rejectid")
     public int rejectid(@RequestBody Record ll){
@@ -94,4 +117,15 @@ public class BookingController{
         return id_value;
 
     }
+
+    
+
+    //update Accept or Reject
+    @PutMapping(path="/getbookingbyid")
+    public BookingModel bookingById(String id){
+        Record old = RR.findBybooking_id(id);                                  
+        BookingModel bm = new BookingModel();
+        return bm;
+    }
+    
 }
