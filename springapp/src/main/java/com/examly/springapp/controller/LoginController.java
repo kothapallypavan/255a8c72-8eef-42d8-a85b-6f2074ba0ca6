@@ -61,10 +61,11 @@ public class LoginController{
         }
     }
     
-    //lawyer GET
-    @GetMapping("/Lawyer")
-    public @ResponseBody List<User>getallLawyers(){
-        return userR.find_lawyers("yes");
+    @RequestMapping(value = "/Lawyer", method = RequestMethod.GET)
+    public @ResponseBody List<User> getallLawyers() {
+        List<User> list = new ArrayList<>();
+        list.addAll(userR.find_lawyers("yes"));
+        return list;
     }
     
     @RequestMapping(method = RequestMethod.POST,value="/case")
