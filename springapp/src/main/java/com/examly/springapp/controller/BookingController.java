@@ -28,7 +28,21 @@ public class BookingController{
     @Autowired
     public UserRepository userR;
     
-
+    //GET Lawyer bookings
+    @GetMapping("/Lawyer/booking")
+    public @ResponseBody List<BookingModel> getBooking(){
+        List<BookingModel> bm = new ArrayList<BookingModel>();
+        List<Record>r = RR.findAll();
+        for(int i=0;i<r.size();i++){
+            Record newr = r.get(i);
+            BookingModel newbm = new BookingModel();
+            newbm.setBookingid(newr.getBookingid());
+            newbm.setLawfirmName(newr.getLawyer());
+            bm.add(newbm);
+        }
+        return bm;
+    }
+    
     //view CaseRecord
     @GetMapping("/booking/{id}")
     public @ResponseBody BookingModel viewCaseRecord(@PathVariable String id){
