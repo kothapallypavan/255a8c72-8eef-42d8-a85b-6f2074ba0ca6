@@ -19,7 +19,14 @@ public class ReportController{
 
     @Autowired
     public RecordRepository RR;
+    
+    //save report
+    @RequestMapping(method = RequestMethod.POST,value="/addreport")
+    public void addReport(@RequestBody Record ll){
+        RR.save(ll);
 
+    }
+    
     //update report 
     @RequestMapping(method = RequestMethod.POST,value="/updatereport")
     public int updatereport(@RequestBody Record ll){
