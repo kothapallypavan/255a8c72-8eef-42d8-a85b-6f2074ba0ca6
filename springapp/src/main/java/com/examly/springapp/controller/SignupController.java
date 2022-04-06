@@ -1,5 +1,6 @@
 package com.examly.springapp.controller;
 import com.examly.springapp.Model.User;
+import com.examly.springapp.Model.UserModel;
 import com.examly.springapp.Repositorie.UserRepository;
 import com.examly.springapp.server.Details;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,15 +30,22 @@ public class SignupController{
     }
 
     //signup POST
+    //signup POST
     @RequestMapping(method = RequestMethod.POST,value="/signup")
-    public boolean saveUser(@RequestBody User user) throws IOException{
-        List<User>res_list = userR.findByUser_mail(user.getMail());
-        List<User>res_list2 = userR.findByUser_name(user.getUser_name());
+    public boolean saveUser(@RequestBody UserModel user) throws IOException{
+        User u = new User();
+        u.setUser_name(user.getUser_name());
+        u.setMail(user.getMail());
+        u.setPassword(user.getPassword());
+        u.setNumber(user.getNumber());
+        u.setFull_name(user.getUser_name());
+        List<User>res_list = userR.findByUser_mail(u.getMail());
+        List<User>res_list2 = userR.findByUser_name(u.getUser_name());
         if(res_list.size()>=1 || res_list2.size()>=1){            
             return false;
         }
         else{           
-                userR.save(user);
+                userR.save(u);
                 return true;    
         }
         
