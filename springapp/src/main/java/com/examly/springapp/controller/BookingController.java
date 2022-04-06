@@ -28,8 +28,8 @@ public class BookingController{
     @Autowired
     public UserRepository userR;
     
-    //GET Lawyer bookings
-    @GetMapping("/Lawyer/booking")
+    //GET All bookings
+    @GetMapping("/bookings")
     public @ResponseBody List<BookingModel> getBooking(){
         List<BookingModel> bm = new ArrayList<BookingModel>();
         List<Record>r = RR.findAll();
