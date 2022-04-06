@@ -34,7 +34,7 @@ function Home() {
         let sign_up_data = "1";
         await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/login",
         {
-          "mail":email,
+          "email":email,
           "password":password
         }
           ).then(data => {

@@ -1,5 +1,6 @@
 package com.examly.springapp.controller;
 import com.examly.springapp.Model.User;
+import com.examly.springapp.Model.LoginModel;
 import com.examly.springapp.Model.Record;
 import com.examly.springapp.Repositorie.UserRepository;
 import com.examly.springapp.Repositorie.RecordRepository;
@@ -28,7 +29,7 @@ public class LoginController{
     //login POST
     @CrossOrigin(origins = "https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io")
     @RequestMapping(method = RequestMethod.POST,value="/login")
-    public String checkUser(@RequestBody User user){
+    public String checkUser(@RequestBody LoginModel user){
         if(user.getMail().equals("admin")){
             System.out.println("admin id");
             if(user.getPassword().equals("admin")){

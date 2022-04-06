@@ -31,7 +31,7 @@ public class AdminController{
     
     //Array of Lawyers
     @GetMapping("/Admin/Lawyer")
-    public List<User>lawyerdetails(){
+    public @ResponseBody List<User>lawyerdetails(){
         return userR.find_lawyers("yes");
     }
 
