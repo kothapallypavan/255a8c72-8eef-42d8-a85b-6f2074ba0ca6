@@ -3,14 +3,17 @@ body{
 }
 .header{
   margin-top: 0;
-  height:80px;
-  background-color: #398AB9;
+  height:60px;
+  background-color: skyblue;
 }
 .header h1{
   margin-top:0;
+  margin-bottom: 0.5rem;
+  margin-left:100px;
+    line-height: 1.2;
   padding:10px;
-  color:white;
-  text-shadow: 0px 5px #686D76;
+  color:black;
+  font-size:30px;
 }
 .loginBox{
   color:#398AB9;
