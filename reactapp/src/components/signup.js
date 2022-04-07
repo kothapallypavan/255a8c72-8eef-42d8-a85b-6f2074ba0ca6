@@ -103,7 +103,7 @@ function Signup() {
          <p>Already a User?<a id="signinLink" onClick={loginclick}> Login</a>
          </p>
         </div>
-        <Button onClick={signup_submit}>SUBMIT</Button>
+        <Button onClick={signup_submit} id="submitButton">SUBMIT</Button>
       </form>
     </div>
 

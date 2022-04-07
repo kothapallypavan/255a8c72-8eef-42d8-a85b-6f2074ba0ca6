@@ -134,7 +134,7 @@ const Case = () => {
             </Container>
             </Navbar>
             </div>
-            <div id="hello" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
+            <div id="userCaseRecord" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
                     <Table striped bordered hover id="table_id">
                     <thead>
                         <tr>
@@ -169,7 +169,7 @@ const Case = () => {
                                 <p style={{float:"left",marginTop:"20px"}}>Action Taken:</p>
                                 <br></br>
                                 <Form.Control id="actionid" as="textarea" rows={4} style={{resize: "none",marginBottom:"20px"}}/>
-                                <Button type="submit">SUBMIT</Button>
+                                <Button id="uploadButton" type="submit">SUBMIT</Button>
                             </Form>
                         </Card.Body>
             </Card>

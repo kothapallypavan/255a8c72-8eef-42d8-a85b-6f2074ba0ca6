@@ -60,7 +60,7 @@ const Lawyerhome = () => {
     setTempyear(e.target.name);
     setTempid(e.target.value);
     console.log(tempid);
-    let c  = document.getElementById("hello");
+    let c  = document.getElementById("lawyerHome");
     let d  = document.getElementById("hello2");
     d.style.float = "right";
     d.style.display = "block";
@@ -144,7 +144,7 @@ const Lawyerhome = () => {
         </Navbar>
         </div>
         
-      <div id="hello" style={{textAlign:"center",float:"left",width:"1050px",padding:"1rem"}}>
+      <div id="lawyerHome" style={{textAlign:"center",float:"left",width:"1050px",padding:"1rem"}}>
       {
                                
         lawyers.map(lawyer => (

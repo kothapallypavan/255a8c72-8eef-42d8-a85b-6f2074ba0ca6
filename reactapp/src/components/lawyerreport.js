@@ -73,7 +73,7 @@ const Lawerreport = () => {
           setSlot(recorddb[i].slot);
         }
       }
-      let c  = document.getElementById("hello");
+      let c  = document.getElementById("lawyerCaseReport");
       let d  = document.getElementById("hello2");
       d.style.float = "right";
       d.style.display = "block";
@@ -95,7 +95,7 @@ const Lawerreport = () => {
           if(data.data==1){
             alert("Report updated");
             let d  = document.getElementById("hello2");
-            let c  = document.getElementById("hello");
+            let c  = document.getElementById("lawyerCaseReport");
             d.style.display = "none";
             c.style.width="100%";
           }
@@ -109,7 +109,7 @@ const Lawerreport = () => {
   
     const closebutton = () => {
       let d  = document.getElementById("hello2");
-      let c  = document.getElementById("hello");
+      let c  = document.getElementById("lawyerCaseReport");
       d.style.display = "none";
       c.style.width="100%";
     }
@@ -153,7 +153,7 @@ const Lawerreport = () => {
         </Navbar>
         </div>
         
-      <div id="hello" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
+      <div id="lawyerCaseReport" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
       {
                                
           recorddb.map(lawyer => (lawyer.lawyer==cookies.get("lawyername") && lawyer.isconfirmed=='yes' &&
@@ -181,7 +181,7 @@ const Lawerreport = () => {
             <Form onSubmit={handleSubmit}>
             <Form.Control as="textarea" id="formtext" rows={12} style={{resize: "none",margin:"20px 0px",backgroundColor:"skyblue"}} placeholder="Enter the case details here" required/>
                       
-              <Button type="submit">Submit</Button>
+              <Button type="submit" id="submitButton">Submit</Button>
             </Form>
           </Card.Body>
         </Card>

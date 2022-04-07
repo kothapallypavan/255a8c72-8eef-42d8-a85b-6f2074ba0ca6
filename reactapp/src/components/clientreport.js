@@ -75,7 +75,7 @@ const Clientreport = () => {
           setReport(recorddb[i].report);
         }
       }
-      let c  = document.getElementById("hello");
+      let c  = document.getElementById("userCaseReport");
       let d  = document.getElementById("hello2");
       d.style.float = "right";
       d.style.display = "block";
@@ -97,7 +97,7 @@ const Clientreport = () => {
           if(data.data==1){
             alert("Report updated");
             let d  = document.getElementById("hello2");
-            let c  = document.getElementById("hello");
+            let c  = document.getElementById("userCaseReport");
             d.style.display = "none";
             c.style.width="100%";
           }
@@ -111,7 +111,7 @@ const Clientreport = () => {
   
     const closebutton = () => {
       let d  = document.getElementById("hello2");
-      let c  = document.getElementById("hello");
+      let c  = document.getElementById("userCaseReport");
       d.style.display = "none";
       c.style.width="100%";
     }
@@ -155,7 +155,7 @@ const Clientreport = () => {
         </Navbar>
         </div>
         
-      <div id="hello" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
+      <div id="userCaseReport" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
       {
                                
           recorddb.map(lawyer => (

@@ -70,6 +70,17 @@ const Admin = () => {
           setExperiance(db[i].exp);
           setMail(db[i].mail);
           setSpecialist(db[i].specialist);
+
+          Setupdatename(db[i].user_name);
+          Setupdatepassword(db[i].password);
+          Setupdateemail(db[i].mail);
+          Setupdateexp(db[i].exp);
+          Setupdatespec(db[i].specialist);
+          console.log(updatename)
+          console.log(updatepassword)
+          console.log(updateemail)
+          console.log(updateexp)
+          console.log(updatespec)
           break;
       }
     }
@@ -208,7 +219,7 @@ const Admin = () => {
         </Navbar>
         </div>
 
-        <div >
+        <div id="adminHome">
         <Form.Control onChange={searchFeild} id="searchBox" as="textarea" rows={1} style={{ float:"left",border:"1px solid black",marginLeft:"10%",width:"50%",marginTop:"20px",resize: "none",marginBottom:"20px"}} placeholder="Type here to search"/>
         <Button id="searchButton" onClick={searchFeild} style={{marginTop:"20px",marginLeft:"20px"}}>Search</Button>
         <Button id="addButton" onClick={showpopup} style={{marginTop:"20px",marginLeft:"20px"}}>ADD</Button>

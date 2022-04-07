@@ -130,7 +130,7 @@ const Caserecordlawyer = () => {
             </Container>
             </Navbar>
             </div>
-            <div id="hello" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
+            <div id="lawyerCaseRecord" style={{textAlign:"center",float:"left",width:"100%",padding:"1rem"}}>
                     <Table striped bordered hover id="table_id">
                     <thead>
                         <tr>
