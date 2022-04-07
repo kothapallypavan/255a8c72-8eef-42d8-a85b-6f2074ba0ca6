@@ -133,7 +133,7 @@ const Admin = () => {
     var newurl = old_url.concat(text);
     const userdata={
       mail:updateemail,
-      user_name:updatename,
+      name:updatename,
       password:updatepassword,
       exp:updateexp,
       specialist:updatespec
@@ -227,7 +227,7 @@ const Admin = () => {
         
         {
             
-            db.map(lawyer => ( lawyer.user_name.includes(search)  &&
+            db.map(lawyer => ( lawyer.user_name.includes(search) &&
               <tr>
                 <td style={{textAlign:"center",padding:"20px"}}>{a}</td>
                 <td style={{textAlign:"center"}}>{lawyer.user_name}</td>

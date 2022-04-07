@@ -64,6 +64,7 @@ public class AdminController{
     @PutMapping(path="/Admin/Lawyer/{id}")
     public int update_lawyer(@RequestBody LawyerModel ll,@PathVariable String id){
         int id_value = Integer.parseInt(id);
+        //System.out.println(ll.getName);
         User u = userR.findById(id_value).get();
         u.setisLawyer("yes");
         u.setFull_name(ll.getName());
@@ -72,7 +73,6 @@ public class AdminController{
         u.setExp(ll.getExp());
         u.setSpec(ll.getSpec());
         u.setUser_name(ll.getName());
-        userR.save(u);
         userR.save(u);
         return 1;
     }
