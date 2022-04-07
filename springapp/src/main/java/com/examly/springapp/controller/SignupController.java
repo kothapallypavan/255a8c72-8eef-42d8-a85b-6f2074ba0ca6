@@ -30,7 +30,6 @@ public class SignupController{
     }
 
     //signup POST
-    //signup POST
     @RequestMapping(method = RequestMethod.POST,value="/signup")
     public boolean saveUser(@RequestBody UserModel user) throws IOException{
         User u = new User();

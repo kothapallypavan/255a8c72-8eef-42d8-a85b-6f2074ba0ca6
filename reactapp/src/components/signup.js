@@ -58,10 +58,10 @@ function Signup() {
         if(password==confirmPassword){
           sign_up_data = await axios.post("https://8080-babeffbeddcfcbbecbcefddccbedbddd.examlyiopb.examly.io/signup", 
             {
-              'mail':email,
+              'email':email,
               'password':password,
-              'user_name':username,
-              'number':mobileNumber
+              'username':username,
+              'mobileNumber':mobileNumber
             }
           );
           if(String(sign_up_data.data)=="false"){
