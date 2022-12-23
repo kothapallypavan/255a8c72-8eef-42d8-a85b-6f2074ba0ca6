@@ -1,1 +1,2 @@
-# 255a8c72-8eef-42d8-a85b-6f2074ba0ca6
+# LawHarbor - lawyer appointment management 
+# Full stack java web application
